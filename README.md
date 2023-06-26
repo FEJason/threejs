@@ -1,2 +1,2 @@
 # threejs
-three.js预览
+案例预览
