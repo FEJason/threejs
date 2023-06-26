@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>实现全景图查看</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link type="text/css" rel="stylesheet" href="main.css">
+	</head>
+	<body>
+
+		<div id="container"></div>
+
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "../build/three.module.js",
+					"three/addons/": "./jsm/"
+				}
+			}
+		</script>
+
+		<script type="module">
+
+			import * as THREE from 'three';
+			import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
+
+      // 相机、场景、渲染器
+			let camera, scene, renderer;
+
+			init();
+			animate();
+
+      // 初始化
+			function init() {
+
+				const container = document.getElementById( 'container' );
+
+        // 场景
+				scene = new THREE.Scene();
+
+        // 相机
+				camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1100 );
+				// 初始相机位置
+				// 这里想要全景图显示初始位置，设置 x 0.01
+				camera.position.set(0.01, 0, 0);
+
+				/**
+				 *  创建球:
+				 *	radius — 球体半径，默认为1。
+				 *	widthSegments — 水平分段数（沿着经线分段），最小值为3，默认值为32。
+				 *	heightSegments — 垂直分段数（沿着纬线分段），最小值为2，默认值为16。
+				*/
+				const geometry = new THREE.SphereGeometry( 100, 80, 80 );
+				geometry.scale( - 1, 1, 1 ); // 反转x轴上的几何图形，使所有面都指向内侧
+
+        // 加载材质
+				const texture = new THREE.TextureLoader().load( 'textures/panorama/2294472375_24a3b8ef46_o.jpg' );
+				const material = new THREE.MeshBasicMaterial( { map: texture } );
+				
+				const mesh = new THREE.Mesh( geometry, material ); // 创建网格，将全景图贴在球上
+				
+				scene.add( mesh ); // 将网格添加到场景
+
+        // 渲染器
+				renderer = new THREE.WebGLRenderer();
+				renderer.setPixelRatio( window.devicePixelRatio ); // 设置像素比率
+				renderer.setSize( window.innerWidth, window.innerHeight ); // 设置渲染器大小
+				container.appendChild( renderer.domElement ); // 将渲染器添加到容器元素中
+
+				// 添加轨道控制器，可以使得相机围绕目标进行轨道运动
+				const controls = new OrbitControls(camera, container);
+				controls.rotateSpeed = -0.25; // 修正方向
+
+				window.addEventListener( 'resize', onWindowResize );
+
+			}
+
+      // 动画渲染
+			function animate() {
+				requestAnimationFrame( animate );
+				
+				renderer.render( scene, camera );
+			}
+			
+			// 窗口大小变化，
+			function onWindowResize() {
+				// 更新相机长宽比
+				camera.aspect = window.innerWidth / window.innerHeight;
+				// 更新摄像机投影矩阵。在任何参数被改变以后必须被调用。
+				camera.updateProjectionMatrix();
+
+				// 更新渲染器大小
+				renderer.setSize( window.innerWidth, window.innerHeight );
+			}
+
+		</script>
+	</body>
+</html>
