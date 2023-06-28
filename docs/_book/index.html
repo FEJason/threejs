@@ -1,0 +1,299 @@
+
+<!DOCTYPE HTML>
+<html lang="zh" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>介绍 · three.js 实现VR看房</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Jason <gitjason@163.com>">
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-prism/prism-okaidia.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="section1/" />
+    
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="輸入並搜尋" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://fejason.github.io" target="_blank" class="custom-link">fejason.github.io</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter active" data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="section1/">
+            
+                <a href="section1/">
+            
+                    
+                    Three.js文件包下载，本地服务器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="section2/">
+            
+                <a href="section2/">
+            
+                    
+                    开发和学习环境，引入three.js库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="section3/">
+            
+                <a href="section3/">
+            
+                    
+                    第一个3D案例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="section4/">
+            
+                <a href="section4/">
+            
+                    
+                    使用three.js实现全景图查看
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <!--<li>-->
+        <!--<a href="https://www.gitbook.com" target="blank" class="gitbook-link">-->
+            <!--本書使用 GitBook 釋出-->
+        <!--</a>-->
+    <!--</li>-->
+</ul>
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >介绍</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x5B66;&#x4E60;web3d&#x7684;&#x8D8B;&#x52BF;&#xFF0C;&#x8D76;&#x9E2D;&#x5B50;&#x4E0A;&#x67B6;&#x505A;-web3d-&#x9879;&#x76EE;">&#x5B66;&#x4E60;Web3D&#x7684;&#x8D8B;&#x52BF;&#xFF0C;&#x8D76;&#x9E2D;&#x5B50;&#x4E0A;&#x67B6;&#x505A; Web3D &#x9879;&#x76EE;</h1>
+<h2 id="web3d-&#x4ECB;&#x7ECD;">Web3D &#x4ECB;&#x7ECD;</h2>
+<p><code>Web3D</code>&#x53EF;&#x89C6;&#x5316;&#x8FD9;&#x4E9B;&#x5E74;&#x521A;&#x521A;&#x5174;&#x8D77;&#xFF0C;&#x5728;&#x7269;&#x8054;&#x7F51;&#x65F6;&#x4EE3;&#xFF0C;&#x662F;&#x4EBA;&#x4E0E;&#x7269;&#x3001;&#x7269;&#x4E0E;&#x7269;&#x8FDE;&#x63A5;&#xFF0C;&#x968F;&#x7740;&#x7269;&#x8054;&#x7F51;&#x7684;&#x53D1;&#x5C55;&#xFF0C;&#x8FD9;&#x65F6;&#x5019;&#x8D8A;&#x6765;&#x8D8A;&#x591A;&#x7684; Web &#x5E94;&#x7528;&#xFF0C;&#x6709;&#x4E86; 3D &#x53EF;&#x89C6;&#x5316;&#x7684;&#x9700;&#x6C42;&#x3002;&#x5143;&#x5B87;&#x5B99;&#x3001;&#x6570;&#x5B57;&#x5B6A;&#x751F;&#x3001;VR &#x770B;&#x623F;...&#x3002;&#x5E02;&#x573A;&#x9700;&#x6C42;&#x65FA;&#x76DB;&#xFF0C;&#x4F46;&#x662F;&#x61C2;<code>WebGL</code>&#x7684;&#x5DE5;&#x7A0B;&#x5E08;&#x53C8;&#x662F;&#x7A00;&#x7F3A;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x5BF9;&#x524D;&#x7AEF;&#x6765;&#x8BF4;&#xFF0C;&#x5B66;&#x4E60;<code>WebGL</code>&#x662F;&#x4E00;&#x4E2A;&#x8D8B;&#x52BF;&#xFF0C;&#x4E5F;&#x662F;&#x4E00;&#x4E2A;&#x53D1;&#x5C55;&#x65B9;&#x5411;&#x3002;&#x6700;&#x597D;&#x7684;&#x5B66;&#x4E60;<code>WebGL</code>&#x7684;&#x65B9;&#x6CD5;&#x662F;&#x901A;&#x8FC7;&#x771F;&#x5B9E;&#x9879;&#x76EE;&#x7684;&#x78E8;&#x7EC3;&#x3002;</p>
+<p>&#x62DB;&#x8058;&#x4E13;&#x95E8;<code>WebGL</code>&#x524D;&#x7AEF;&#x5DE5;&#x7A0B;&#x5E08;&#x56F0;&#x96BE;&#xFF1A;</p>
+<ol>
+<li>&#x7F3A;&#x4EBA;</li>
+<li>&#x6210;&#x672C;&#x9AD8;</li>
+</ol>
+<p>&#x5BF9;&#x4E8E;&#x516C;&#x53F8;&#x6765;&#x8BF4;&#xFF0C;&#x5982;&#x679C;&#x4E13;&#x95E8;&#x627E;&#x4E00;&#x4E2A;<code>WebGL</code>&#x524D;&#x7AEF;&#x5DE5;&#x7A0B;&#x5E08;&#x6709;&#x96BE;&#x5EA6;&#xFF0C;&#x6700;&#x9760;&#x8C31;&#x7684;&#x65B9;&#x6848;&#xFF0C;&#x5C31;&#x662F;&#x8BA9; Web &#x524D;&#x7AEF;&#x81EA;&#x5B66;<code>WebGL</code>&#x548C;<code>Three.js</code></p>
+<h2 id="&#x5F00;&#x542F;-threejs-&#x5B66;&#x4E60;&#x4E4B;&#x65C5;">&#x5F00;&#x542F; Three.js &#x5B66;&#x4E60;&#x4E4B;&#x65C5;</h2>
+<p>three.js&#x5176;&#x5B9E;&#x662F;&#x4F7F;&#x7528;WebGL&#x6765;&#x7ED8;&#x5236;&#x4E09;&#x7EF4;&#x6548;&#x679C;&#x7684;&#x3002;
+&#x5B83;&#x5C01;&#x88C5;&#x4E86;&#x8BF8;&#x5982;&#x573A;&#x666F;&#x3001;&#x706F;&#x5149;&#x3001;&#x9634;&#x5F71;&#x3001;&#x6750;&#x8D28;&#x3001;&#x8D34;&#x56FE;&#x3001;&#x7A7A;&#x95F4;&#x8FD0;&#x7B97;&#x7B49;&#x4E00;&#x7CFB;&#x5217;&#x529F;&#x80FD;&#xFF0C;&#x8BA9;&#x4F60;&#x4E0D;&#x5FC5;&#x4ECE;&#x5E95;&#x5C42;WebGL&#x5F00;&#x59CB;&#x5199;&#x8D77;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                
+                <a href="section1/" class="navigation navigation-next navigation-unique" aria-label="Next page: Three.js文件包下载，本地服务器">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"介绍","level":"1.1","depth":1,"next":{"title":"Three.js文件包下载，本地服务器","level":"1.2","depth":1,"path":"section1/README.md","ref":"section1/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","prism","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-okaidia.min.css"]},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Jason <gitjason@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"three.js 实现VR看房","language":"zh","links":{"sidebar":{"fejason.github.io":"https://fejason.github.io"}},"gitbook":"*","description":"three.js 实现VR看房"},"file":{"path":"README.md","mtime":"2023-06-28T02:39:09.011Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-06-28T02:49:51.069Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

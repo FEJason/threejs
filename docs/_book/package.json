@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "gitbook-plugin-prism": "^2.4.0"
+  }
+}

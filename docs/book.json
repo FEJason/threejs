@@ -1,0 +1,19 @@
+{
+  "title": "three.js 实现VR看房",
+  "author": "Jason <gitjason@163.com>",
+  "description": "three.js 实现VR看房",
+  "language": "zh",
+  "links": {
+    "sidebar": {
+      "fejason.github.io": "https://fejason.github.io"
+    }
+  },
+  "plugins": ["-sharing", "prism"],
+  "pluginsConfig": {
+    "prism": {
+      "css": [
+          "prismjs/themes/prism-okaidia.min.css"
+      ]
+    }
+  }
+}

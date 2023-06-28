@@ -1,0 +1,365 @@
+
+<!DOCTYPE HTML>
+<html lang="zh" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>第一个3D案例 · three.js 实现VR看房</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        <meta name="author" content="Jason <gitjason@163.com>">
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-prism/prism-okaidia.min.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="../section4/" />
+    
+    
+    <link rel="prev" href="../section2/" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="輸入並搜尋" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+    
+        
+        <li>
+            <a href="https://fejason.github.io" target="_blank" class="custom-link">fejason.github.io</a>
+        </li>
+    
+    
+
+    
+    <li class="divider"></li>
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    介绍
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../section1/">
+            
+                <a href="../section1/">
+            
+                    
+                    Three.js文件包下载，本地服务器
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../section2/">
+            
+                <a href="../section2/">
+            
+                    
+                    开发和学习环境，引入three.js库
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    第一个3D案例
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../section4/">
+            
+                <a href="../section4/">
+            
+                    
+                    使用three.js实现全景图查看
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <!--<li>-->
+        <!--<a href="https://www.gitbook.com" target="blank" class="gitbook-link">-->
+            <!--本書使用 GitBook 釋出-->
+        <!--</a>-->
+    <!--</li>-->
+</ul>
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >第一个3D案例</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x7B2C;&#x4E00;&#x4E2A;3d&#x6848;&#x4F8B;&#x2014;&#x2014;&#x521B;&#x5EFA;3d&#x573A;&#x666F;">&#x7B2C;&#x4E00;&#x4E2A;3D&#x6848;&#x4F8B;&#x2014;&#x2014;&#x521B;&#x5EFA;3D&#x573A;&#x666F;</h1>
+<p>&#x5165;&#x95E8;<code>Three.js</code>&#x7684;&#x7B2C;&#x4E00;&#x6B65;&#xFF1A;&#x8BA4;&#x8BC6;3&#x4E2A;&#x57FA;&#x672C;&#x6982;&#x5FF5;</p>
+<ol>
+<li>&#x573A;&#x666F; Scene</li>
+<li>&#x76F8;&#x673A; Camera</li>
+<li>&#x6E32;&#x67D3;&#x5668; Renderer</li>
+</ol>
+<p>&#x53EA;&#x8981;&#x80FD;&#x628A;&#x7B2C;&#x4E00;&#x4E2A;3D&#x6848;&#x4F8B;&#x641E;&#x660E;&#x767D;&#xFF0C;&#x540E;&#x9762;&#x7684;&#x5B66;&#x4E60;&#x4F1A;&#x975E;&#x5E38;&#x987A;&#x5229;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x5F00;&#x59CB;&#x642D;&#x5EFA;&#x4E00;&#x4E2A;&#x573A;&#x666F;&#xFF0C;&#x5176;&#x4E2D;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x6B63;&#x5728;&#x65CB;&#x8F6C;&#x7684;&#x7ACB;&#x65B9;&#x4F53;&#x3002;</p>
+<h2 id="&#x521B;&#x5EFA;&#x4E09;&#x7EF4;&#x573A;&#x666F;">&#x521B;&#x5EFA;&#x4E09;&#x7EF4;&#x573A;&#x666F;</h2>
+<p>&#x53EF;&#x4EE5;&#x628A;&#x4E09;&#x7EF4;&#x573A;&#x666F;<code>Scene</code>&#x5BF9;&#x8C61;&#x7406;&#x89E3;&#x4E3A;&#x865A;&#x62DF;&#x7684;3D&#x573A;&#x666F;&#xFF0C;&#x7528;&#x6765;&#x8868;&#x793A;&#x6A21;&#x62DF;&#x751F;&#x6D3B;&#x4E2D;&#x7684;&#x771F;&#x5B9E;&#x4E09;&#x7EF4;&#x573A;&#x666F;&#xFF0C;&#x6216;&#x8005;&#x8BF4;&#x662F;&#x4E09;&#x7EF4;&#x4E16;&#x754C;&#x3002;</p>
+<pre class="language-"><code class="lang-javascript"><span class="token comment">// &#x521B;&#x5EFA;3D&#x573A;&#x666F;&#x5BF9;&#x8C61;Scene</span>
+<span class="token keyword">const</span> scene <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>Scene</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="&#x521B;&#x5EFA;&#x76F8;&#x673A;">&#x521B;&#x5EFA;&#x76F8;&#x673A;</h2>
+<pre class="language-"><code class="lang-javascript"><span class="token comment">// &#x521B;&#x5EFA;&#x76F8;&#x673A;</span>
+<span class="token comment">// three.js&#x91CC;&#x6709;&#x51E0;&#x79CD;&#x4E0D;&#x540C;&#x7684;&#x76F8;&#x673A;&#xFF0C;&#x5728;&#x8FD9;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x7684;&#x662F;PerspectiveCamera&#xFF08;&#x900F;&#x89C6;&#x76F8;&#x673A;&#xFF09;</span>
+<span class="token keyword">const</span> camera <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>PerspectiveCamera</span><span class="token punctuation">(</span>
+  <span class="token comment">// &#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#xFF1A;&#x89C6;&#x91CE;&#x89D2;&#x5EA6;&#xFF08;FOV&#xFF09;</span>
+  <span class="token number">75</span><span class="token punctuation">,</span>
+  <span class="token comment">// &#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#xFF1A;&#x957F;&#x5BBD;&#x6BD4;&#xFF08;aspect ratio&#xFF09;</span>
+  <span class="token comment">// &#x6BD4;&#x5982;&#xFF0C;&#x5F53;&#x4F60;&#x5728;&#x4E00;&#x4E2A;&#x5BBD;&#x5C4F;&#x7535;&#x89C6;&#x4E0A;&#x64AD;&#x653E;&#x8001;&#x7535;&#x5F71;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x56FE;&#x50CF;&#x662F;&#x88AB;&#x538B;&#x6241;&#x7684;&#x3002;</span>
+  window<span class="token punctuation">.</span>innerWidth <span class="token operator">/</span> window<span class="token punctuation">.</span>innerHeight<span class="token punctuation">,</span>
+  <span class="token comment">// &#x5F53;&#x7269;&#x4F53;&#x67D0;&#x4E9B;&#x90E8;&#x5206;&#x6BD4;&#x6444;&#x50CF;&#x673A;&#x7684;&#x8FDC;&#x622A;&#x9762;&#x8FDC;&#x6216;&#x8005;&#x6BD4;&#x8FD1;&#x622A;&#x9762;&#x8FD1;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x8BE5;&#x8FD9;&#x4E9B;&#x90E8;&#x5206;&#x5C06;&#x4E0D;&#x4F1A;&#x88AB;&#x6E32;&#x67D3;&#x5230;&#x573A;&#x666F;&#x4E2D;&#x3002;</span>
+  <span class="token number">0.1</span><span class="token punctuation">,</span> <span class="token comment">// &#x8FD1;&#x622A;&#x9762;&#xFF08;near&#xFF09;</span>
+  <span class="token number">1000</span> <span class="token comment">// &#x8FDC;&#x622A;&#x9762;&#xFF08;far&#xFF09;</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="&#x521B;&#x5EFA;&#x6E32;&#x67D3;&#x5668;">&#x521B;&#x5EFA;&#x6E32;&#x67D3;&#x5668;</h2>
+<pre class="language-"><code class="lang-javascript"><span class="token comment">// &#x521B;&#x5EFA;&#x6E32;&#x67D3;&#x5668;</span>
+<span class="token comment">// three.js&#x540C;&#x6837;&#x63D0;&#x4F9B;&#x4E86;&#x5176;&#x5B83;&#x51E0;&#x79CD;&#x6E32;&#x67D3;&#x5668;</span>
+<span class="token keyword">const</span> renderer <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>WebGLRenderer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// &#x8BBE;&#x7F6E;&#x6E32;&#x67D3;&#x5668;&#x7684;&#x5C3A;&#x5BF8;</span>
+renderer<span class="token punctuation">.</span><span class="token function">setSize</span><span class="token punctuation">(</span> window<span class="token punctuation">.</span>innerWidth<span class="token punctuation">,</span> window<span class="token punctuation">.</span>innerHeight <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// &#x5C06; renderer&#xFF08;&#x6E32;&#x67D3;&#x5668;&#xFF09;&#x7684;dom&#x5143;&#x7D20;&#xFF08;renderer.domElement&#xFF09;&#x6DFB;&#x52A0;&#x5230;&#x6211;&#x4EEC;&#x7684;HTML&#x6587;&#x6863;&#x4E2D;&#x3002;</span>
+<span class="token comment">// &#x8FD9;&#x5C31;&#x662F;&#x6E32;&#x67D3;&#x5668;&#x7528;&#x6765;&#x663E;&#x793A;&#x573A;&#x666F;&#x7ED9;&#x6211;&#x4EEC;&#x770B;&#x7684; &lt;canvas&gt; &#x5143;&#x7D20;</span>
+document<span class="token punctuation">.</span>body<span class="token punctuation">.</span><span class="token function">appendChild</span><span class="token punctuation">(</span> renderer<span class="token punctuation">.</span>domElement <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="&#x6DFB;&#x52A0;&#x7ACB;&#x65B9;&#x4F53;">&#x6DFB;&#x52A0;&#x7ACB;&#x65B9;&#x4F53;</h2>
+<pre class="language-"><code class="lang-javascript"><span class="token comment">// &#x6DFB;&#x52A0;&#x7ACB;&#x65B9;&#x4F53;</span>
+<span class="token keyword">const</span> geometry <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>BoxGeometry</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// &#x7ED9;&#x7ACB;&#x65B9;&#x4F53;&#x4E00;&#x4E2A;&#x6750;&#x8D28;&#xFF0C;&#x6765;&#x8BA9;&#x5B83;&#x6709;&#x989C;&#x8272;</span>
+<span class="token keyword">const</span> material <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>MeshBasicMaterial</span><span class="token punctuation">(</span> <span class="token punctuation">{</span> <span class="token literal-property property">color</span><span class="token operator">:</span> <span class="token number">0x00ff00</span> <span class="token punctuation">}</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// &#x521B;&#x5EFA;&#x4E00;&#x4E2A;Mesh&#xFF08;&#x7F51;&#x683C;&#xFF09;&#x3002;&#x7F51;&#x683C;&#x5305;&#x542B;&#x4E00;&#x4E2A;&#x51E0;&#x4F55;&#x4F53;&#x4EE5;&#x53CA;&#x4F5C;&#x7528;&#x5728;&#x5F53;&#x524D;&#x51E0;&#x4F55;&#x4F53;&#x4E0A;&#x7684;&#x6750;&#x8D28;</span>
+<span class="token keyword">const</span> mesh <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">THREE<span class="token punctuation">.</span>Mesh</span><span class="token punctuation">(</span> geometry<span class="token punctuation">,</span> material <span class="token punctuation">)</span><span class="token punctuation">;</span>
+scene<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span> mesh <span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// &#x5C06;&#x7F51;&#x683C;&#x6DFB;&#x52A0;&#x5230;&#x573A;&#x666F;&#x4E2D;</span>
+
+<span class="token comment">// &#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x8C03;&#x7528;scene.add()&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x7269;&#x4F53;&#x5C06;&#x4F1A;&#x88AB;&#x6DFB;&#x52A0;&#x5230;(0,0,0)&#x5750;&#x6807;&#x3002;</span>
+<span class="token comment">// &#x8FD9;&#x6837;&#x4F1A;&#x5BFC;&#x81F4;&#x76F8;&#x673A;&#x548C;&#x7ACB;&#x65B9;&#x4F53;&#x5728;&#x4E00;&#x8D77;&#x3002;&#x4F1A;&#x5BFC;&#x81F4;&#x770B;&#x5230;&#x7684;&#x662F;&#x4E00;&#x7247;&#x6F06;&#x9ED1;&#x3002;</span>
+<span class="token comment">// &#x4E3A;&#x4E86;&#x9632;&#x6B62;&#x770B;&#x4E0D;&#x5230;&#x7269;&#x4F53;&#xFF0C;&#x6211;&#x4EEC;&#x53EA;&#x9700;&#x8981;&#x5C06;&#x76F8;&#x673A;&#x7A0D;&#x5411;&#x5916;&#x79FB;&#x52A8;&#x4E00;&#x4E9B;&#x5373;&#x53EF;</span>
+camera<span class="token punctuation">.</span>position<span class="token punctuation">.</span>z <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="&#x52A8;&#x753B;&#x5FAA;&#x73AF;">&#x52A8;&#x753B;&#x5FAA;&#x73AF;</h2>
+<pre class="language-"><code class="lang-javascript"><span class="token comment">// &#x5230;&#x8FD9;&#x4E00;&#x6B65;&#xFF0C;&#x4F60;&#x4E0D;&#x4F1A;&#x770B;&#x5230;&#x4EFB;&#x4F55;&#x4E1C;&#x897F;&#xFF0C;&#x8FD9;&#x662F;&#x56E0;&#x4E3A;&#x6211;&#x4EEC;&#x8FD8;&#x6CA1;&#x6709;&#x5BF9;&#x5B83;&#x8FDB;&#x884C;&#x771F;&#x6B63;&#x7684;&#x6E32;&#x67D3;&#x3002;</span>
+<span class="token comment">// &#x6211;&#x9700;&#x8981;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x52A8;&#x753B;&#x5FAA;&#x73AF;</span>
+<span class="token keyword">function</span> <span class="token function">animate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// requestAnimationFrame&#x6709;&#x5F88;&#x591A;&#x7684;&#x4F18;&#x70B9;&#x3002;</span>
+  <span class="token comment">// &#x6700;&#x91CD;&#x8981;&#x7684;&#x4E00;&#x70B9;&#x6216;&#x8BB8;&#x5C31;&#x662F;&#x5F53;&#x7528;&#x6237;&#x5207;&#x6362;&#x5230;&#x5176;&#x5B83;&#x7684;&#x6807;&#x7B7E;&#x9875;&#x65F6;&#xFF0C;&#x5B83;&#x4F1A;&#x6682;&#x505C;&#xFF0C;</span>
+  <span class="token comment">// &#x56E0;&#x6B64;&#x4E0D;&#x4F1A;&#x6D6A;&#x8D39;&#x7528;&#x6237;&#x5B9D;&#x8D35;&#x7684;&#x5904;&#x7406;&#x5668;&#x8D44;&#x6E90;&#xFF0C;&#x4E5F;&#x4E0D;&#x4F1A;&#x635F;&#x8017;&#x7535;&#x6C60;&#x7684;&#x4F7F;&#x7528;&#x5BFF;&#x547D;&#x3002;</span>
+  <span class="token function">requestAnimationFrame</span><span class="token punctuation">(</span> animate <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  mesh<span class="token punctuation">.</span>rotation<span class="token punctuation">.</span>y <span class="token operator">+=</span> <span class="token number">0.01</span><span class="token punctuation">;</span> <span class="token comment">// &#x8BA9;&#x7ACB;&#x65B9;&#x4F53;&#x7ED5;Y&#x8F74;&#x65CB;&#x8F6C;</span>
+
+  <span class="token comment">// &#x5728;&#x6BCF;&#x6B21;&#x5C4F;&#x5E55;&#x5237;&#x65B0;&#x65F6;&#x5BF9;&#x573A;&#x666F;&#x8FDB;&#x884C;&#x7ED8;&#x5236;&#xFF0C;&#x5927;&#x591A;&#x6570;&#x5C4F;&#x5E55;&#x4E0A;&#xFF0C;&#x5237;&#x65B0;&#x7387;&#x4E00;&#x822C;&#x662F;60&#x6B21;/&#x79D2;</span>
+  renderer<span class="token punctuation">.</span><span class="token function">render</span><span class="token punctuation">(</span> scene<span class="token punctuation">,</span> camera <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token function">animate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>&#x5230;&#x8FD9;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x4E00;&#x4E2A;&#x7ED5;Y&#x8F74;&#x65CB;&#x8F6C;&#x7684;&#x7ACB;&#x65B9;&#x4F53;</p>
+<h2 id="&#x9884;&#x89C8;&#x5730;&#x5740;">&#x9884;&#x89C8;&#x5730;&#x5740;</h2>
+<p><a href="https://fejason.github.io/threejs/examples/01-first_3d.html" target="_blank">https://fejason.github.io/threejs/examples/01-first_3d.html</a></p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../section2/" class="navigation navigation-prev " aria-label="Previous page: 开发和学习环境，引入three.js库">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="../section4/" class="navigation navigation-next " aria-label="Next page: 使用three.js实现全景图查看">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"第一个3D案例","level":"1.4","depth":1,"next":{"title":"使用three.js实现全景图查看","level":"1.5","depth":1,"path":"section4/README.md","ref":"section4/README.md","articles":[]},"previous":{"title":"开发和学习环境，引入three.js库","level":"1.3","depth":1,"path":"section2/README.md","ref":"section2/README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-sharing","prism","livereload"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"prism":{"css":["prismjs/themes/prism-okaidia.min.css"]},"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","author":"Jason <gitjason@163.com>","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{},"title":"three.js 实现VR看房","language":"zh","links":{"sidebar":{"fejason.github.io":"https://fejason.github.io"}},"gitbook":"*","description":"three.js 实现VR看房"},"file":{"path":"section3/README.md","mtime":"2023-06-28T02:49:24.456Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-06-28T02:49:51.069Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
