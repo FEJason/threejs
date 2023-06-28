@@ -9,10 +9,6 @@
 	<body>
 
 		<div id="container"></div>
-		<div id="info">
-			<a href="https://threejs.org" target="_blank" rel="noopener">three.js webgl</a> - equirectangular panorama demo. photo by <a href="http://www.flickr.com/photos/jonragnarsson/2294472375/" target="_blank" rel="noopener">Jón Ragnarsson</a>.<br />
-			drag equirectangular texture into the page.
-		</div>
 
 		<!-- Import maps polyfill -->
 		<!-- Remove this when import maps will be widely supported -->
@@ -65,7 +61,7 @@
 				geometry.scale( - 1, 1, 1 ); // 反转x轴上的几何图形，使所有面都指向内侧
 
         // 加载材质
-				const texture = new THREE.TextureLoader().load( 'textures/panorama/2294472375_24a3b8ef46_o.jpg' );
+				const texture = new THREE.TextureLoader().load( 'textures/panorama/2f5d65c3.jpg' );
 				const material = new THREE.MeshBasicMaterial( { map: texture } );
 
 				const mesh = new THREE.Mesh( geometry, material );
