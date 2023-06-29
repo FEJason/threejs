@@ -63,4 +63,4 @@ function animate() {
 ```
 
 ## 预览地址
-https://fejason.github.io/threejs/examples/02-view_panorama.html
+https://fejason.github.io/threejs/examples/02-全景图查看.html

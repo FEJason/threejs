@@ -1,5 +1,8 @@
-# threejs
-VR全景看房系列
+# VR全景看房
+
+使用`three.js`实现VR全景看房
+
+陆续更新中...
 
 ## 书籍
 [Three.js 实现VR全景看房](https://fejason.github.io/threejs/docs/_book)
@@ -8,7 +11,4 @@ VR全景看房系列
 ```
 |-- build                     three.js
 |-- examples                  VR全景技术案例Demo
-  |-- 01-first_3d                第一个3D案例
-  |-- 02-view_panorama           使用three.js实现全景图查看
-  |-- webgl_panorama_equirectangular.html    three.js官方demo实现VR看房(详细注释)
 ```

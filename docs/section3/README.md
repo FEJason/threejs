@@ -87,4 +87,4 @@ animate();
 到这里，我们可以看到一个绕Y轴旋转的立方体
 
 ## 预览地址
-https://fejason.github.io/threejs/examples/01-first_3d.html
+https://fejason.github.io/threejs/examples/01-第一个3D案例.html
